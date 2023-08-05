@@ -1,0 +1,14 @@
+﻿@model PieListViewModel
+
+<h1>@Model.CurrentCategory</h1>
+@foreach (var pie in Model.Pies)
+{
+    <div class="col">
+        <div class="card pie-card">
+            <img src="@pie.ImageThumbnailUrl" class="card-img-top" alt=""
+        </div>
+        <h2>@pie.Name</h2>
+        <h3>@pie.Price.ToString("c")</h3>
+        <h4>@pie.Category.CategoryName</h4>
+    </div>
+}
