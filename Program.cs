@@ -1,5 +1,6 @@
 using BethanysPieShop.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,12 +12,19 @@ builder.Services.AddScoped<IShoppingCart, ShoppingCart>(sp => ShoppingCart.GetCa
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+builder.Services.AddRazorPages();
 builder.Services.AddDbContext<BethanysPieShopDbContext>(options =>
 {
-    options.UseSqlServer(
+    options.UseNpgsql(
         builder.Configuration["ConnectionStrings:BethanysPieShopDbContextConnection"]);
 });
+
+builder.Services.AddServerSideBlazor();
 
 var app = builder.Build();
 
@@ -29,6 +37,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.MapDefaultControllerRoute();
+app.MapRazorPages();
+
+app.MapBlazorHub();
+app.MapFallbackToPage("/app/{*catchall}", "/App/Index");
 
 DbInitializer.Seed(app);
 

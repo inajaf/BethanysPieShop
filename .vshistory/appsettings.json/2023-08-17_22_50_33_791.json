@@ -1,0 +1,12 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "BethanysPieShopDbContextConnection": "User ID=postgres;Password=Xaknet5813102!;Host=localhost;Port=5432;Database=resunet"
+  }
+}
