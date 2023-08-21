@@ -34,7 +34,7 @@
 
             _bethanysPieShopDbContext.Orders.Add(order);
 
-            _bethanysPieShopDbContext.SaveChanges();
+            _ = _bethanysPieShopDbContext.SaveChanges();
         }
     }
 }

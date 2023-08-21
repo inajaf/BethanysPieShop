@@ -1,6 +1,6 @@
 ﻿namespace BethanysPieShop.Models
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderRepository: IOrderRepository
     {
         private readonly BethanysPieShopDbContext _bethanysPieShopDbContext;
         private readonly IShoppingCart _shoppingCart;
@@ -11,8 +11,8 @@
             _shoppingCart = shoppingCart;
         }
 
-        public void CreateOrder(Order order)
-        {
+        public void CreateOrder(Order order) 
+        { 
             order.OrderPlaced = DateTime.Now;
 
             List<ShoppingCartItem>? shoppingCartItems = _shoppingCart.ShoppingCartItems;
@@ -33,7 +33,6 @@
             }
 
             _bethanysPieShopDbContext.Orders.Add(order);
-
             _bethanysPieShopDbContext.SaveChanges();
         }
     }

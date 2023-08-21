@@ -7,6 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("BethanysPieShopDbContextConnection") ?? 
     throw new InvalidOperationException("Connection string 'BethanysPieShopDbContextConnection' not found.");
 
+var host = builder.Build();
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+... //your other scoped code
+await host.RunAsync();
 
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IPieRepository, PieRepository>();
